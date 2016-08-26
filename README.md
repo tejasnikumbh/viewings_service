@@ -115,8 +115,7 @@ Conversations
 =============
 
 * URL:- <server_name>/api/v1/conversations
-
-	- GET
+    - GET
 	Parameters are necessary. Validators are in place.
 	params => ``` user_id=<some_id> ```
     - Functionality 
@@ -124,7 +123,7 @@ Conversations
     - Example
         ``` 0.0.0.0:8000/api/v1/conversations/user_id=1 ```
     	- The conversations are grouped by user_id of the conversing partner.
-    	- Sample Response:-  [For tenant] - Note tenant id is same
+    	- Sample Response:-  Note tenant id is same for as_tenant, same with as_host
 
 	```javascript
     	 [
@@ -174,4 +173,3 @@ Conversations
     	 	]
     	 ]```
     	
-    - Similar for host, with same host id in response
