@@ -87,6 +87,7 @@ Viewings
   	- Functionality
   		- Can be used to accept or decline a viewing by a host
   	- Example
+  	
   		```javascript
    	 	 [
    	 	 	{
