@@ -116,8 +116,8 @@ Conversations
 
 * URL:- <server_name>/api/v1/conversations
     - GET
-	Parameters are necessary. Validators are in place.
-	params => ``` user_id=<some_id> ```
+	- Parameters are necessary. Validators are in place.
+	- params => ``` user_id=<some_id> ```
     - Functionality 
     	- Can be used to retrieve all conversations for user [tenant or host]
     - Example
