@@ -27,8 +27,11 @@ Viewings
 * URL:- <servername>/api/v1/viewings(/ for POST/PUT)
 
   - GET
+  	
   	Parameters are necessary. Validators for them are in place
+  	
   	params => ``` user_id=<some_id>&user_type=<tenant or host> ```
+
   	params => ``` user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D>```
 
     - Functionality 
