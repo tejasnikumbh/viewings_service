@@ -128,21 +128,51 @@ Conversations
 
    	 	```javascript
    	 	 [
-   	 		{
-   	 		 "host_id": 1,
-   	 		 "tenant_id": 2,
-    	    "messages": [
-    			"Viewing requested at a particular time by Tejas",
-    			"Viewing declined by Ralph"	
-    		]
-    	 	},
-    		{
-    	    "host_id": 2,
-    		 "tenant_id": 2,
-    	    "message": [
-    			"Viewing requested at a particular time by Tejas",
-    			"Viewing accepted by Gelator"]
-    	 	}
-    	 ]
+   	 		"as_host" : 
+   	 		[
+   	 			{
+   	 				"id": 1,
+   	 		 		"tenant_id": 2,
+    	    				"messages": [
+    					"Viewing requested at a particular time by Tejas",
+    					"Viewing declined by Ralph"]
+    	 			},
+    	 			{
+   	 				"id": 1,
+   	 		 		"tenant_id": 3,
+    	    				"messages": [
+    					"Viewing requested at a particular time by Tejas",
+    					"Viewing declined by Ralph"]
+    	 			},{
+   	 				"id": 1,
+   	 		 		"tenant_id": 5,
+    	    				"messages": [
+    					"Viewing requested at a particular time by Tejas",
+    					"Viewing declined by Ralph"]
+    	 			},
+    	 		]
+    			"as_tenant": 
+    			[
+    				{
+    	    				"id": 1,
+    		 			"host_id": 4,
+	    	    			"message": [
+    					"Viewing requested at a particular time by Tejas",
+    					"Viewing accepted by Gelator"]
+    	 			},{
+    	    				"id": 1,
+    		 			"host_id": 6,
+	    	    			"message": [
+    					"Viewing requested at a particular time by Tejas",
+    					"Viewing accepted by Gelator"]
+    	 			},{
+    	    				"id": 1,
+    		 			"host_id": 7,
+	    	    			"message": [
+    					"Viewing requested at a particular time by Tejas",
+    					"Viewing accepted by Gelator"]
+    	 			}
+    	 		]
+    	 	]
     	```
     	- Similar for host, with same host id in response
