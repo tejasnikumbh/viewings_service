@@ -112,7 +112,7 @@ Conversations
         - 0.0.0.0:8000/api/v1/conversations/user_id=1
     	- The conversations are grouped by user_id of the conversing partner.
     	- Sample Response:-  [For tenant] - Note tenant id is same
-   	 	- ```javascript
+   	 	```javascript
    	 	 [
    	 		{
    	 		 "host_id": 1,
