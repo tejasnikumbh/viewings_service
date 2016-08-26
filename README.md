@@ -172,8 +172,6 @@ Conversations
     				"Viewing accepted by Gelator"]
     	 		}
     	 	]
-    	 ]
-    	 
-    	```
+    	 ]```
     	
-    	- Similar for host, with same host id in response
+    - Similar for host, with same host id in response
