@@ -17,7 +17,7 @@ API Endpoints
 --------------
 
 Viewings
-^^^^^^^^^^
+=========
 
 * URL:- <servername>/api/v1/viewings(/ for POST/PUT)
 
@@ -88,7 +88,7 @@ Viewings
     
 
 Conversations
-^^^^^^^^^^^^^
+=============
 
 * URL:- <server_name>/api/v1/conversations
 
@@ -119,4 +119,3 @@ Conversations
     	$ 	}
     	$ ]
     Similar for host, with same host id in response
-    
