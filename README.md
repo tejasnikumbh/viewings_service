@@ -16,8 +16,7 @@ Running the Project
 API Endpoints
 --------------
 
-Viewings
-=========
+* Viewings
 
 * URL:- <servername>/api/v1/viewings(/ for POST/PUT)
 
@@ -87,8 +86,7 @@ Viewings
     	$ }
     
 
-Conversations
-=============
+* Conversations
 
 * URL:- <server_name>/api/v1/conversations
 
