@@ -48,17 +48,17 @@ Viewings
     - Sample Response
 
     ```javascript
-   	 [
-   	 	{
-   		 "id": 1,
-   	     "scheduled_time": "2016-08-08T06:00:00Z",
-   	     "company_name": "Hubble",
-         "number_of_desks": 3,
-   	     "phone_number": "7766666666",
-   	     "description_of_company": "Hubble is a Office Rental Space Company in London",
-   	     "move_in_date": "2016-08-16",
-   	     "hubble_discovery_info": "Through friends",
-   	     "tenant": 1,
+    [
+    	{
+    	 "id": 1,
+    	 "scheduled_time": "2016-08-08T06:00:00Z",
+    	 "company_name": "Hubble",
+    	 "number_of_desks": 3,
+    	 "phone_number": "7766666666",
+    	 "description_of_company": "Hubble is a Office Rental Space Company in London",
+    	 "move_in_date": "2016-08-16",
+    	 "hubble_discovery_info": "Through friends",
+    	 "tenant": 1,
     	 "office": 2,
     	 "status": "R"
     	 }
@@ -81,12 +81,12 @@ Viewings
          "scheduled_time": "2016-08-08T06:00:00Z",
          "company_name": "Hubble",
          "number_of_desks": 3,
-   	     "phone_number": "7766666666",
-   	     "description_of_company": "Hubble is a Office Rental Space Company in London",
-   	     "move_in_date": "2016-08-16",
-   	     "hubble_discovery_info": "Through friends",
-   	     "tenant": 1,    	     
-   	     "office": 2,
+         "phone_number": "7766666666",
+         "description_of_company": "Hubble is a Office Rental Space Company in London",
+         "move_in_date": "2016-08-16",
+         "hubble_discovery_info": "Through friends",
+         "tenant": 1,    	     
+         "office": 2,
     	}
      ]
    	``` 
@@ -104,7 +104,7 @@ Viewings
      [
      	{
          "viewing_id": 1,
-     	 "host_id": 1,
+         "host_id": 1,
          "status": "C"
      	}
      ]
@@ -126,53 +126,52 @@ Conversations
     	- The conversations are grouped by user_id of the conversing partner.
     	- Sample Response:-  [For tenant] - Note tenant id is same
 
-   	 	```javascript
+	```javascript
+    	 [
+   	 	 "as_host" : 
    	 	 [
-   	 		"as_host" : 
-   	 		[
-   	 			{
-   	 				"id": 1,
-   	 		 		"tenant_id": 2,
-    	    				"messages": [
-    					"Viewing requested at a particular time by Tejas",
-    					"Viewing declined by Ralph"]
-    	 			},
-    	 			{
-   	 				"id": 1,
-   	 		 		"tenant_id": 3,
-    	    				"messages": [
-    					"Viewing requested at a particular time by Tejas",
-    					"Viewing declined by Ralph"]
-    	 			},{
-   	 				"id": 1,
-   	 		 		"tenant_id": 5,
-    	    				"messages": [
-    					"Viewing requested at a particular time by Tejas",
-    					"Viewing declined by Ralph"]
-    	 			},
-    	 		]
-    			"as_tenant": 
-    			[
-    				{
-    	    				"id": 1,
-    		 			"host_id": 4,
-	    	    			"message": [
-    					"Viewing requested at a particular time by Tejas",
-    					"Viewing accepted by Gelator"]
-    	 			},{
-    	    				"id": 1,
-    		 			"host_id": 6,
-	    	    			"message": [
-    					"Viewing requested at a particular time by Tejas",
-    					"Viewing accepted by Gelator"]
-    	 			},{
-    	    				"id": 1,
-    		 			"host_id": 7,
-	    	    			"message": [
-    					"Viewing requested at a particular time by Tejas",
-    					"Viewing accepted by Gelator"]
-    	 			}
-    	 		]
+   	 	 	{
+   	 	 		"id": 1,
+   	 	 		"tenant_id": 2,
+   	 	 		"messages": [
+   	 	 		"Viewing requested at a particular time by Tejas",
+   	 	 		"Viewing declined by Ralph"]
+   	 	 	},{
+   	 	 		"id": 1,
+   	 	 		"tenant_id": 3,
+   	 	 		"messages": [
+   	 	 		"Viewing requested at a particular time by Tejas",
+   	 	 		"Viewing declined by Ralph"]
+   	 	 	},{
+   	 	 		"id": 1,
+   	 	 		"tenant_id": 5,
+   	 	 		"messages": [
+   	 	 		"Viewing requested at a particular time by Tejas",
+   	 	 		"Viewing declined by Ralph"]
+    	 		},
     	 	]
+    	 	"as_tenant": 
+    	 	[
+    	 		{
+    	 			"id": 1,
+    	 			"host_id": 4,
+    	 			"message": [
+    	 			"Viewing requested at a particular time by Tejas",
+    	 			"Viewing accepted by Gelator"]
+    	 		},{
+    	 			"id": 1,
+    	 			"host_id": 6,
+    	 			"message": [
+    	 			"Viewing requested at a particular time by Tejas",
+    	 			"Viewing accepted by Gelator"]
+    	 		},{
+    	 			"id": 1,
+    	 			"host_id": 7,
+    	 			"message": [
+    				"Viewing requested at a particular time by Tejas",
+    				"Viewing accepted by Gelator"]
+    	 		}
+    	 	]
+    	 ]
     	```
     	- Similar for host, with same host id in response
