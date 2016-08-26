@@ -30,9 +30,8 @@ Viewings
 
   - GET
   	Parameters are necessary. Validators for them are in place
-  	
-  	- params => user_id=<some_id>&user_type=<tenant or host> 
-  	- params => user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D>
+  	params => ``` user_id=<some_id>&user_type=<tenant or host> ```
+  	params => ``` user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D>```
 
     - Functionality 
     	- Can be used to retrieve all confirmed viewings for tenant [user_id, tenant, C]
@@ -118,7 +117,7 @@ Conversations
 
 	- GET
 	Parameters are necessary. Validators are in place.
-	$ params => user_id=<some_id>
+	params => ``` user_id=<some_id> ```
     - Functionality 
     	- Can be used to retrieve all conversations for user [tenant or host]
     - Example
