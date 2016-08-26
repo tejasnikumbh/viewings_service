@@ -6,11 +6,18 @@ Hubble Microservice for Managing Viewings and Conversations
 Running the Project
 --------------------
 * To run the project, simply type in the following command while in the root of the project
-	 ```python manage.py runserver 0.0.0.0:8000```
-  This will run the project on the 8000 port of 0.0.0.0 of your machine
+	- Command
+
+	```python manage.py runserver 0.0.0.0:8000```
+
+  	- This will run the project on the 8000 port of 0.0.0.0 of your machine
+
 * If you'd like creating and destroying projects, make a super user using the following 
-	 ```python manage.py createsuperuser```
-  And use the credentials you enter to log into the admin
+	- Command
+	
+	```python manage.py createsuperuser```
+
+  	- And use the credentials you enter to log into the admin
 
 
 API Endpoints
@@ -23,14 +30,17 @@ Viewings
 
   - GET
   	Parameters are necessary. Validators for them are in place
-  	params => user_id=<some_id>&user_type=<tenant or host>
-  	params => user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D>
+  	
+  	- params => user_id=<some_id>&user_type=<tenant or host> 
+  	- params => user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D>
+
     - Functionality 
     	- Can be used to retrieve all confirmed viewings for tenant [user_id, tenant, C]
     	- Can be used to retrieve all confirmed viewings for hosts [user_id, host, C]
     - Example
-        - 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=tenant&status=C
-        - 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=host&status=C
+
+        ``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=tenant&status=C ```
+        ``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=host&status=C ```
     - Additional functionality
     	- Can be used to retrieve all viewings for a particular user & type
     	- Can be used to retrieve Requested Viewings for a particular user & type    
@@ -112,7 +122,7 @@ Conversations
     - Functionality 
     	- Can be used to retrieve all conversations for user [tenant or host]
     - Example
-        - 0.0.0.0:8000/api/v1/conversations/user_id=1
+        ``` 0.0.0.0:8000/api/v1/conversations/user_id=1 ```
     	- The conversations are grouped by user_id of the conversing partner.
     	- Sample Response:-  [For tenant] - Note tenant id is same
 
