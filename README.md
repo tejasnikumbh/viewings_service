@@ -37,19 +37,21 @@ Viewings
     	- Can be used to retrieve Declined Viewings for a particular user & type
     - Sample Response
     	```javascript
-    	 {
+    	 [
+    	 	{
     		 "id": 1,
-    	    "scheduled_time": "2016-08-08T06:00:00Z",
-    	    "company_name": "Hubble",
-    	    "number_of_desks": 3,
-    	    "phone_number": "7766666666",
-    	    "description_of_company": "Hubble is a Office Rental Space Company in London",
-    	    "move_in_date": "2016-08-16",
-    	    "hubble_discovery_info": "Through friends",
-    	    "tenant": 1,
-    	    "office": 2,
-    	    "status": "R"
-    	 }
+    	     "scheduled_time": "2016-08-08T06:00:00Z",
+    	     "company_name": "Hubble",
+    	     "number_of_desks": 3,
+    	     "phone_number": "7766666666",
+    	     "description_of_company": "Hubble is a Office Rental Space Company in London",
+    	     "move_in_date": "2016-08-16",
+    	     "hubble_discovery_info": "Through friends",
+    	     "tenant": 1,
+    	     "office": 2,
+    	     "status": "R"
+    	 	}
+    	 ]
     	 ```
 
   - POST
@@ -62,17 +64,19 @@ Viewings
      	- Value of status field can be 'R' only. Validators in place
     - Example 
     	```javascript
-    	{
-    	    "scheduled_time": "2016-08-08T06:00:00Z",
-    	    "company_name": "Hubble",
-    	    "number_of_desks": 3,
-    	    "phone_number": "7766666666",
-    	    "description_of_company": "Hubble is a Office Rental Space Company in London",
-    	    "move_in_date": "2016-08-16",
-    	    "hubble_discovery_info": "Through friends",
-    	    "tenant": 1,
-    	    "office": 2,
-    	 }
+    	[
+    		{
+    	     "scheduled_time": "2016-08-08T06:00:00Z",
+    	     "company_name": "Hubble",
+    	     "number_of_desks": 3,
+    	     "phone_number": "7766666666",
+    	     "description_of_company": "Hubble is a Office Rental Space Company in London",
+    	     "move_in_date": "2016-08-16",
+    	     "hubble_discovery_info": "Through friends",
+    	     "tenant": 1,
+    	     "office": 2,
+    	 	}
+    	 ]
     	``` 
    - PUT
    	No parameters required, Can directly send a PUT request to URL with a JSON body as follows
@@ -84,11 +88,13 @@ Viewings
   		- Can be used to accept or decline a viewing by a host
   	- Example
   		```javascript
-   	 	 {
-    	    "viewing_id": 1,
+   	 	 [
+   	 	 	{
+    	     "viewing_id": 1,
     	 	 "host_id": 1,
-    	    "status": "C"
-    	 }
+    	     "status": "C"
+    	 	}
+    	 ]
     	```
     
 
