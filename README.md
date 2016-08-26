@@ -6,11 +6,13 @@ Hubble Microservice for Managing Viewings and Conversations
 Running the Project
 --------------------
 * To run the project, simply type in the following command while in the root of the project
+
 	```python manage.py runserver 0.0.0.0:8000```
 
   	- This will run the project on the 8000 port of 0.0.0.0 of your machine
 
 * If you'd like creating and destroying projects, make a super user using the following 
+
 	```python manage.py createsuperuser```
 
   	- And use the credentials you enter to log into the admin
