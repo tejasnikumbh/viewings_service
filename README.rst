@@ -16,7 +16,8 @@ Running the Project
 API Endpoints
 --------------
 
-* Viewings
+Viewings
+^^^^^^^^^^
 
 * URL:- <servername>/api/v1/viewings(/ for POST/PUT)
 
@@ -86,7 +87,8 @@ API Endpoints
     	$ }
     
 
-* Conversations
+Conversations
+^^^^^^^^^^^^^
 
 * URL:- <server_name>/api/v1/conversations
 
@@ -117,3 +119,4 @@ API Endpoints
     	$ 	}
     	$ ]
     Similar for host, with same host id in response
+    
