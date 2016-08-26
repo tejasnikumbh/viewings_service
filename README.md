@@ -36,23 +36,24 @@ Viewings
     	- Can be used to retrieve Requested Viewings for a particular user & type    
     	- Can be used to retrieve Declined Viewings for a particular user & type
     - Sample Response
-    	```javascript
-    	 [
-    	 	{
-    		 "id": 1,
-    	     "scheduled_time": "2016-08-08T06:00:00Z",
-    	     "company_name": "Hubble",
-    	     "number_of_desks": 3,
-    	     "phone_number": "7766666666",
-    	     "description_of_company": "Hubble is a Office Rental Space Company in London",
-    	     "move_in_date": "2016-08-16",
-    	     "hubble_discovery_info": "Through friends",
-    	     "tenant": 1,
-    	     "office": 2,
-    	     "status": "R"
-    	 	}
-    	 ]
-    	 ```
+
+    ```javascript
+   	 [
+   	 	{
+   		 "id": 1,
+   	     "scheduled_time": "2016-08-08T06:00:00Z",
+   	     "company_name": "Hubble",
+         "number_of_desks": 3,
+   	     "phone_number": "7766666666",
+   	     "description_of_company": "Hubble is a Office Rental Space Company in London",
+   	     "move_in_date": "2016-08-16",
+   	     "hubble_discovery_info": "Through friends",
+   	     "tenant": 1,
+    	 "office": 2,
+    	 "status": "R"
+    	 }
+     ]
+    ```
 
   - POST
   	No parameters necessary, Can directly send a POST request to URL with a JSON body as follows
@@ -63,21 +64,22 @@ Viewings
      	- Can be used to request a viewing by a tenant
      	- Value of status field can be 'R' only. Validators in place
     - Example 
-    	```javascript
-    	[
-    		{
-    	     "scheduled_time": "2016-08-08T06:00:00Z",
-    	     "company_name": "Hubble",
-    	     "number_of_desks": 3,
-    	     "phone_number": "7766666666",
-    	     "description_of_company": "Hubble is a Office Rental Space Company in London",
-    	     "move_in_date": "2016-08-16",
-    	     "hubble_discovery_info": "Through friends",
-    	     "tenant": 1,
-    	     "office": 2,
-    	 	}
-    	 ]
-    	``` 
+
+    ```javascript
+    [
+    	{
+         "scheduled_time": "2016-08-08T06:00:00Z",
+         "company_name": "Hubble",
+         "number_of_desks": 3,
+   	     "phone_number": "7766666666",
+   	     "description_of_company": "Hubble is a Office Rental Space Company in London",
+   	     "move_in_date": "2016-08-16",
+   	     "hubble_discovery_info": "Through friends",
+   	     "tenant": 1,    	     
+   	     "office": 2,
+    	}
+     ]
+   	``` 
    - PUT
    	No parameters required, Can directly send a PUT request to URL with a JSON body as follows
 	Note that accepted value in status field is C or D only, since the endpoint is intended for 
@@ -87,16 +89,16 @@ Viewings
   	- Functionality
   		- Can be used to accept or decline a viewing by a host
   	- Example
-  	
-  		```javascript
-   	 	 [
-   	 	 	{
-    	     "viewing_id": 1,
-    	 	 "host_id": 1,
-    	     "status": "C"
-    	 	}
-    	 ]
-    	```
+
+  	```javascript
+     [
+     	{
+         "viewing_id": 1,
+     	 "host_id": 1,
+         "status": "C"
+     	}
+     ]
+    ```
     
 
 Conversations
@@ -113,6 +115,7 @@ Conversations
         - 0.0.0.0:8000/api/v1/conversations/user_id=1
     	- The conversations are grouped by user_id of the conversing partner.
     	- Sample Response:-  [For tenant] - Note tenant id is same
+
    	 	```javascript
    	 	 [
    	 		{
@@ -132,4 +135,4 @@ Conversations
     	 	}
     	 ]
     	```
-    Similar for host, with same host id in response
+    	- Similar for host, with same host id in response
