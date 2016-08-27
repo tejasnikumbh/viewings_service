@@ -22,7 +22,7 @@ API Endpoints
 --------------
 
 Viewings
-
+=========
 
 * URL:- <servername>/api/v1/viewings(/ for POST/PUT)
 
