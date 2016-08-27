@@ -25,8 +25,7 @@ Viewings
 =========
 
 * URL:- <servername>/api/v1/viewings(/ for POST/PUT)
-
-  - GET
+* Request Type:- GET
   	Parameters are necessary. Validators for them are in place
   	
 		params =>  ``` user_id=<some_id>&user_type=<tenant or host> ```
