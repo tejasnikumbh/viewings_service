@@ -29,8 +29,9 @@ Viewings
   - GET
   	Parameters are necessary. Validators for them are in place
   	
-	params =>  ``` user_id=<some_id>&user_type=<tenant or host> ```
-  	params =>  ``` user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D> ```
+		params =>  ``` user_id=<some_id>&user_type=<tenant or host> ```
+  	
+		params =>  ``` user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D> ```
 
     	- Functionality 
     		- Can be used to retrieve all confirmed viewings for tenant [user_id, tenant, C]
@@ -42,6 +43,7 @@ Viewings
     	- Example
         	
         	``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=tenant&status=C ```
+        
         	``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=host&status=C ```
         	
     	- Additional functionality
