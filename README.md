@@ -26,12 +26,9 @@ Viewings
 
 * URL:- <servername>/api/v1/viewings(/ for POST/PUT)
 * Request Type:- GET
-  	Parameters are necessary. Validators for them are in place
-  	
-		params =>  ``` user_id=<some_id>&user_type=<tenant or host> ```
-  	
-		params =>  ``` user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D> ```
-
+  	- Parameters are necessary. Validators for them are in place
+		- params =>  ``` user_id=<some_id>&user_type=<tenant or host> ```
+		- params =>  ``` user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D> ```
     	- Functionality 
     		- Can be used to retrieve all confirmed viewings for tenant [user_id, tenant, C]
     		- Can be used to retrieve all confirmed viewings for hosts [user_id, host, C]
@@ -40,11 +37,8 @@ Viewings
     		- Checks if user exists
     		- Checks if user is of the specified type [tenant or host]
     	- Example
-        	
-        	``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=tenant&status=C ```
-        
-        	``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=host&status=C ```
-        	
+        	- ``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=tenant&status=C ```
+        	- ``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=host&status=C ```
     	- Additional functionality
     		- Can be used to retrieve all viewings for a particular user & type
     		- Can be used to retrieve Requested Viewings for a particular user & type    
@@ -69,11 +63,9 @@ Viewings
      ]
     ```
 
-   - POST
-  	No parameters necessary, Can directly send a POST request to URL with a JSON body as follows
-  	
-  	* Stretch Goal - Check if the viewing time clashes with another booked viewing at same place *
-  	
+* Request Type:- POST
+  	- No parameters necessary, Can directly send a POST request to URL with a JSON body as follows
+  	- * Stretch Goal - Check if the viewing time clashes with another booked viewing at same place *
   	- Functionality
      		- Can be used to request a viewing by a tenant
      	- Validations
@@ -81,7 +73,7 @@ Viewings
      		- Checks if tenant exists
      		- Checks if office exists
      		- If same tenant has scheduled a viewing previously, declines it and adds new viewing
-    - Example 
+    	- Example 
 
     ```javascript
     [
@@ -98,12 +90,10 @@ Viewings
     	}
      ]
    	``` 
-   - PUT
-   	No parameters required, Can directly send a PUT request to URL with a JSON body as follows
-	Note that accepted value in status field is C or D only, since the endpoint is intended for 
-  	updating old viewings only. Validators are in place. Also returns 404 if the viewing_id is not 
-  	found in database.
-  	Another point is host has to own the place of the viewing, else error is raised
+* Request Type:- PUT
+   	- No parameters required, Can directly send a PUT request to URL with a JSON body as follows
+	- Note that accepted value in status field is C or D only, since the endpoint is intended for updating old viewing only. Validators are in place. Also returns 404 if the viewing_id is not found in database.
+  	- Another point is host has to own the place of the viewing, else error is raised
   	- Functionality
   		- Can be used to accept or decline a viewing by a host
   	- Validations
