@@ -126,50 +126,22 @@ Conversations
     	- Sample Response:-  Note tenant id is same for as_tenant, same with as_host
 
 	```javascript
-    	 [
-   	 	 "as_host" : 
-   	 	 [
-   	 	 	{
-   	 	 		"id": 1,
-   	 	 		"tenant_id": 2,
-   	 	 		"messages": [
-   	 	 		"Viewing requested at a particular time by Tejas",
-   	 	 		"Viewing declined by Ralph"]
-   	 	 	},{
-   	 	 		"id": 1,
-   	 	 		"tenant_id": 3,
-   	 	 		"messages": [
-   	 	 		"Viewing requested at a particular time by Tejas",
-   	 	 		"Viewing declined by Ralph"]
-   	 	 	},{
-   	 	 		"id": 1,
-   	 	 		"tenant_id": 5,
-   	 	 		"messages": [
-   	 	 		"Viewing requested at a particular time by Tejas",
-   	 	 		"Viewing declined by Ralph"]
-    	 		},
-    	 	]
-    	 	"as_tenant": 
-    	 	[
-    	 		{
-    	 			"id": 1,
-    	 			"host_id": 4,
-    	 			"message": [
-    	 			"Viewing requested at a particular time by Tejas",
-    	 			"Viewing accepted by Gelator"]
-    	 		},{
-    	 			"id": 1,
-    	 			"host_id": 6,
-    	 			"message": [
-    	 			"Viewing requested at a particular time by Tejas",
-    	 			"Viewing accepted by Gelator"]
-    	 		},{
-    	 			"id": 1,
-    	 			"host_id": 7,
-    	 			"message": [
-    				"Viewing requested at a particular time by Tejas",
-    				"Viewing accepted by Gelator"]
-    	 		}
-    	 	]
-    	 ]```
+	{
+	    "as_host": {
+		    "tenant_name": "Abhishek Gupta",
+		    "messages": [
+            		{
+                		"time_stamp": "2016-08-27T14:40:17.801918Z",
+                		"message": "Need an office space at somepoint"
+            		},
+		        {
+                		"time_stamp": "2016-08-27T14:40:39.311452Z",
+                		"message": "Sorry man can't do it"
+            		}]
+            },
+	    "as_tenant": {
+	    
+	    }
+	}
+    	```
     	
