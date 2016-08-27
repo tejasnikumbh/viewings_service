@@ -27,24 +27,23 @@ Viewings
 * URL:- <servername>/api/v1/viewings(/ for POST/PUT)
 * Request Type:- GET
     - Parameters are necessary. Validators for them are in place
-		- params =>  ``` user_id=<some_id>&user_type=<tenant or host> ```
-		- params =>  ``` user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D> ```
+    	- params =>  ``` user_id=<some_id>&user_type=<tenant or host> ```
+	- params =>  ``` user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D> ```
     - Functionality 
-    		- Can be used to retrieve all confirmed viewings for tenant [user_id, tenant, C]
-    		- Can be used to retrieve all confirmed viewings for hosts [user_id, host, C]
+    	- Can be used to retrieve all confirmed viewings for tenant [user_id, tenant, C]
+    	- Can be used to retrieve all confirmed viewings for hosts [user_id, host, C]
     - Validations
-    		- Checks if all parameters exist and are in proper format
-    		- Checks if user exists
-    		- Checks if user is of the specified type [tenant or host]
+    	- Checks if all parameters exist and are in proper format
+    	- Checks if user exists
+    	- Checks if user is of the specified type [tenant or host]
     - Example
-        	- ``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=tenant&status=C ```
-        	- ``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=host&status=C ```
+        - ``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=tenant&status=C ```
+        - ``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=host&status=C ```
     - Additional functionality
-    		- Can be used to retrieve all viewings for a particular user & type
-    		- Can be used to retrieve Requested Viewings for a particular user & type    
-    		- Can be used to retrieve Declined Viewings for a particular user & type
-    	- Sample Response
-
+    	- Can be used to retrieve all viewings for a particular user & type
+    	- Can be used to retrieve Requested Viewings for a particular user & type    
+    	- Can be used to retrieve Declined Viewings for a particular user & type
+    - Sample Response
     ``` javascript
     [
     	{
