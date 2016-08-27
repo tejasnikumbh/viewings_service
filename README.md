@@ -34,18 +34,22 @@ Viewings
 
   	params => ``` user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D>```
 
-    - Functionality 
-    	- Can be used to retrieve all confirmed viewings for tenant [user_id, tenant, C]
-    	- Can be used to retrieve all confirmed viewings for hosts [user_id, host, C]
-    - Example
+    	- Functionality 
+    		- Can be used to retrieve all confirmed viewings for tenant [user_id, tenant, C]
+    		- Can be used to retrieve all confirmed viewings for hosts [user_id, host, C]
+    	- Validations
+    		- Checks if all parameters exist and are in proper format
+    		- Checks if user exists
+    		- Checks if user is of the specified type [tenant or host]
+    	- Example
 
-        ``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=tenant&status=C ```
-        ``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=host&status=C ```
-    - Additional functionality
-    	- Can be used to retrieve all viewings for a particular user & type
-    	- Can be used to retrieve Requested Viewings for a particular user & type    
-    	- Can be used to retrieve Declined Viewings for a particular user & type
-    - Sample Response
+        	``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=tenant&status=C ```
+        	``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=host&status=C ```
+    	- Additional functionality
+    		- Can be used to retrieve all viewings for a particular user & type
+    		- Can be used to retrieve Requested Viewings for a particular user & type    
+    		- Can be used to retrieve Declined Viewings for a particular user & type
+    	- Sample Response
 
     ```javascript
     [
@@ -65,14 +69,18 @@ Viewings
      ]
     ```
 
-  - POST
+   - POST
   	No parameters necessary, Can directly send a POST request to URL with a JSON body as follows
   	
   	* Stretch Goal - Check if the viewing time clashes with another booked viewing at same place *
   	
   	- Functionality
-     	- Can be used to request a viewing by a tenant
-     	- Value of status field can be 'R' only. Validators in place
+     		- Can be used to request a viewing by a tenant
+     	- Validations
+     		- Checks if all parameters are present and in proper format
+     		- Checks if tenant exists
+     		- Checks if office exists
+     		- If same tenant has scheduled a viewing previously, declines it and adds new viewing
     - Example 
 
     ```javascript
@@ -98,6 +106,12 @@ Viewings
   	Another point is host has to own the place of the viewing, else error is raised
   	- Functionality
   		- Can be used to accept or decline a viewing by a host
+  	- Validations
+  		- Checks if all parameters exist and are in proper format
+  		- Checks if viewing exists
+  		- Checks if host exists
+  		- Checks if office at viewing is owned by host
+  		- Checks if update is performed [R is not Allowed in status field]
   	- Example
 
   	```javascript
@@ -120,6 +134,12 @@ Conversations
 	- params => ``` user_id=<some_id> ```
     - Functionality 
     	- Can be used to retrieve all conversations for user [tenant or host]
+    	- Since a user can be both a tenant and a host, the fields both types of conversations
+    	- Also, keeping in mind that host and tenant dashboards for conversations will be different, they have been grouped differently as such
+    - Validations
+    	- Checks for request parameter structure
+    	- Checks if user_id is in proper format
+    	- Checks if user_id exists
     - Example
         ``` 0.0.0.0:8000/api/v1/conversations/user_id=1 ```
     	- The conversations are grouped by user_id of the conversing partner.
