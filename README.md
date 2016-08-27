@@ -28,7 +28,7 @@ Viewings
 * Request Type:- GET
     - Parameters are necessary. Validators for them are in place
     	- params =>  ``` user_id=<some_id>&user_type=<tenant or host> ```
-	- params =>  ``` user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D> ```
+    	- params =>  ``` user_id=<some_id>&user_type=<tenant or host>&status=<R or C or D> ```
     - Functionality 
     	- Can be used to retrieve all confirmed viewings for tenant [user_id, tenant, C]
     	- Can be used to retrieve all confirmed viewings for hosts [user_id, host, C]
@@ -132,8 +132,7 @@ Conversations
     - Example
         ``` 0.0.0.0:8000/api/v1/conversations/user_id=1 ```
     	- The conversations are grouped by user_id of the conversing partner.
-    	- Sample Response:-  Note tenant id is same for as_tenant, same with as_host
-
+    - Sample Response:-  Note tenant id is same for as_tenant, same with as_host
 	```javascript
 	{
 	    "as_host": {
