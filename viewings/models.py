@@ -25,12 +25,14 @@ class Conversation(models.Model):
 	tenant = models.ForeignKey('User', related_name='tenant')
 	host = models.ForeignKey('User', related_name='host')
 	message = models.TextField()
-	time_stamp = models.DateTimeField()
+	time_stamp = models.DateTimeField(auto_now_add=True)
 
 
 # Dummy Models for simulating functionality
 class User(models.Model):
 	name = models.CharField(max_length=255)
+	is_host = models.BooleanField(default=False)
+	is_tenant = models.BooleanField(default=False)
 	def __str__(self):
 		return self.name
 
