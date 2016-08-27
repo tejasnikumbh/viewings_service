@@ -129,7 +129,7 @@ Conversations
 =============
 
 * URL:- <server_name>/api/v1/conversations
-    - GET
+* Request Type:- GET
 	- Parameters are necessary. Validators are in place.
 	- params => ``` user_id=<some_id> ```
     - Functionality 
