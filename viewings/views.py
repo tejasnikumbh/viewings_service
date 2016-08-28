@@ -95,7 +95,7 @@ class Viewings(APIView):
 		if not(self._validate_post_structure(params)):
 			content = {
 				"message": "Bad Request",
-				"detail" : "One or more parameters is missing"
+				"detail" : "Malformed parameter list. Refer API Docs"
 			}
 			return Response(content, status = status.HTTP_400_BAD_REQUEST)
 	
@@ -168,7 +168,7 @@ class Viewings(APIView):
 		if not(self._validate_put_structure(params)):
 			content = {
 				"message": "Bad Request",
-				"detail" : "One or more parameters is missing"
+				"detail" : "Malformed parameter list. Refer API Docs"
 			}
 			return Response(content, status = status.HTTP_400_BAD_REQUEST)
 		# Checking if viewing exists
@@ -285,6 +285,8 @@ class Viewings(APIView):
 			returns False
 		'''
 		keys = params.keys()
+		if len(keys) != 9:
+			return False
 		if not('scheduled_time' in keys and \
 			'company_name' in keys and \
 			'number_of_desks' in keys and \
@@ -303,6 +305,8 @@ class Viewings(APIView):
 			returns False
 		'''
 		keys = params.keys()
+		if len(keys) != 3:
+			return False
 		if not('viewing_id' in keys and \
 			'host_id' in keys and \
 			'status' in keys):
