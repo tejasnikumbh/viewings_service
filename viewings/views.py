@@ -262,17 +262,21 @@ class Viewings(APIView):
 			* Checks for all required fields being present
 			* Checks for all required fields having correct data
 		'''
-		if not('user_id' in params.keys() and \
+		if len(params.keys()) < 2 or len(params.keys()) > 3:
+			return False
+		if len(params.keys()) == 2 and not('user_id' in params.keys() and \
 			'user_type' in params.keys()):
 			return False
+		if len(params.keys()) == 3 and not('status' in params.keys()):
+			return False
+
 		user_id_valid = self._validate_int(params['user_id'])
 		user_type_valid = self._validate_user_type(params['user_type'])
 		result = user_id_valid and user_id_valid
-		print result
+
 		if 'status' in params.keys():
 			status_valid = self._validate_status(params['status'])
 			result = result and status_valid
-		print result
 		return result
 
 	def _validate_post_structure(self, params):
@@ -412,6 +416,8 @@ class Conversations(APIView):
 # ========================== Validations for Requests ==================== #
 	
 	def _validate_get_structure(self, params):
+		if len(params.keys()) != 1:
+			return False
 		if 'user_id' not in params.keys():
 			return False
 		return self._validate_int(params['user_id'])
