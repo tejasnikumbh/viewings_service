@@ -10,6 +10,16 @@ from . import serializers
 from datetime import datetime
 import json
 
+'''
+	Viewings 
+	--------
+	Useful for the following functions
+
+	* Tenants requesting viewings
+	* Tenants viewing all their confirmed viewings
+	* Hosts accepting or declining viewings
+	* Hosts viewing all their confirmed viewings
+'''
 class Viewings(APIView):
 	def get(self, request, format=None):
 		'''
@@ -242,6 +252,8 @@ class Viewings(APIView):
 		serializer.is_valid(raise_exception=True)
 		conversation.save()
 
+# ========================== Validations for Requests ==================== #
+
 	def _validate_get_structure(self, params):
 		'''
 			Doesn't fail if there are extra params, which at 
@@ -319,7 +331,17 @@ class Viewings(APIView):
 	def _validate_viewing(self, viewing_id):
 		return models.Viewing.objects.filter(id=viewing_id).exists()
 	
+'''
+	Conversations
+	-------------
+	Useful for the following functions
 
+	* As a user can be both a host and tenant, returns conversations
+	grouped by partner
+
+	* Useful for tenant to view conversations
+	* Useful for host to view conversations
+'''
 class Conversations(APIView):
 	def get(self, request, format=None):
 		'''
@@ -387,6 +409,8 @@ class Conversations(APIView):
 			threads.append(current_thread)
 		return threads
 
+# ========================== Validations for Requests ==================== #
+	
 	def _validate_get_structure(self, params):
 		if 'user_id' not in params.keys():
 			return False

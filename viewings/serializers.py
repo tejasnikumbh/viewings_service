@@ -24,14 +24,15 @@ class ViewingSerializer(serializers.ModelSerializer):
 		)
 		model = models.Viewing
 
-
+	# Check if user exists and is tenant
 	def validate_tenant(self, value):
 		if not(models.User.objects.filter(id=value.id).exists()) or \
 		not(models.User.objects.filter(id=value.id).first().is_tenant):
 			print "Tenant not found"
 			raise serializers.ValidationError("Tenant Not Found")
 		return value
-	
+
+	# Check if office exists
 	def validate_office(self, value):
 		if not(models.Office.objects.filter(id=value.id).exists()):
 			print "Office not found"
@@ -69,6 +70,7 @@ class ConversationSerializer(serializers.ModelSerializer):
 		)
 		model = models.Conversation
 	
+	# Check if user exists and is tenant
 	def validate_tenant(self, value):
 		if not(models.User.objects.filter(id=value.id).exists()) or \
 		not(models.User.objects.filter(id=value.id).first().is_tenant):
@@ -76,12 +78,20 @@ class ConversationSerializer(serializers.ModelSerializer):
 			raise serializers.ValidationError("Tenant Not found")
 		return value
 
+	# Check if user exists and is host	
 	def validate_host(self, value):
 		if not(models.User.objects.filter(id=value.id).exists()) or \
 		not(models.User.objects.filter(id=value.id).first().is_host):
 			print "Host not found"
 			raise serializers.ValidationError("Host not found")	
 		return value
+
+	# User cannot talk to itself	
+	def validate(self, data):
+		if data['tenant'].id == data['host'].id:
+			print "User cannot talk to itself"
+			raise serializers.ValidationError("User cannot talk to itself")
+		return data
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -94,6 +104,7 @@ class UserSerializer(serializers.ModelSerializer):
 		)
 		model = models.User
 
+	# User has to be either host or tenant	
 	def validate(self, data):
 		if not(data['is_host']) and not(data['is_tenant']):
 			raise serializers.ValidationError(
@@ -110,6 +121,7 @@ class OfficeSerializer(serializers.ModelSerializer):
 		)
 		model = models.Office
 
+	# Owner has to own the office	
 	def validate_owner(self, value):
 		if not(models.User.objects.filter(id=value.id).exists()) or \
 		not(models.User.objects.filter(id=value.id).first().is_host):
