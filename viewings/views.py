@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
-from django.core.exceptions import ValidationError
+from rest_framework.serializers import ValidationError
 
 from . import models
 from . import serializers

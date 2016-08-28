@@ -24,6 +24,7 @@ class ViewingSerializer(serializers.ModelSerializer):
 		)
 		model = models.Viewing
 
+
 	def validate_tenant(self, value):
 		if not(models.User.objects.filter(id=value.id).exists()) or \
 		not(models.User.objects.filter(id=value.id).first().is_tenant):
@@ -38,11 +39,20 @@ class ViewingSerializer(serializers.ModelSerializer):
 		return value
 
 	def validate(self, data):
+		# Viewings possible only in future
 		if not(data['scheduled_time'] > timezone.now()):
 			print "Scheduled time has to be in the future"
 			raise serializers.ValidationError("Scheduled time has to be in future")
+		# Move in date has to be in future
+		if not(data['move_in_date'] > timezone.now().date()):
+			print "Move in date has to be in future"
+			raise serializers.ValidationError("Move in date has to be in future")
+		# User cannot schedule viewing at own place
+		if data['tenant'].id == data['office'].owner.id:
+			print "Cannot schedule viewing at own place"
+			raise serializers.ValidationError("User cannot schedule viewing at own place")
 		return data
-	
+		
 
 class ConversationSerializer(serializers.ModelSerializer):
 
