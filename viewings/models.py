@@ -9,6 +9,7 @@ REQUEST_STATUS = (
 )
 
 class Viewing(models.Model):
+	created_at = models.DateTimeField(auto_now_add=True)
 	scheduled_time = models.DateTimeField()
 	company_name = models.CharField(max_length=255)
 	number_of_desks = models.IntegerField()
@@ -19,7 +20,6 @@ class Viewing(models.Model):
 	tenant = models.ForeignKey('User', related_name='tenant_user')
 	office = models.ForeignKey('Office', related_name='office')
 	status = models.CharField(max_length=1, choices = REQUEST_STATUS)
-	
 
 class Conversation(models.Model):
 	tenant = models.ForeignKey('User', related_name='tenant')
@@ -27,8 +27,6 @@ class Conversation(models.Model):
 	message = models.TextField()
 	time_stamp = models.DateTimeField(auto_now_add=True)
 
-
-# Dummy Models for simulating functionality
 class User(models.Model):
 	name = models.CharField(max_length=255)
 	is_host = models.BooleanField(default=False)
@@ -41,3 +39,4 @@ class Office(models.Model):
 	description = models.CharField(max_length=255)
 	def __str__(self):
 		return self.description
+		

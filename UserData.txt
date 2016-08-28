@@ -1,0 +1,25 @@
+Users
+id |          name      | is_host | is_tenant
+=============================================
+6  |  Tejas Nikumbh     | True    |True
+7  |  Abhishek Gupta    | False   |True
+8  |  Martin Hubble     | True    |False
+9  |  Tom Hubble        | True    |False
+10 |  Peter Rennert     | False   |True
+11 |  Kasia Streich     | False   |True
+12 |  Shahram Mosayebi  | True    |True
+13 |  Steph Pau         | True    |False
+14 |  Mahtab Ghamsari   | True    |True
+15 |  Paul Golding      | False   |True
+
+Offices
+id |       owner      | description
+=============================================
+10 |  Tejas Nikumbh   | Office in Bermondsey
+11 |  Tom Hubble      | Office in Central London
+12 |  Martin Hubble   | Office in Leicester Square
+13 |  Steph Pau       | Office in Shoreditch
+14 |  Mahtab Ghamsari | Office in Westminster
+15 |  Tejas Nikumbh   | Office in Waterloo
+16 |  Tejas Nikumbh   | Office in USA
+17 |  Tom Hubble      | Office in Minnesota

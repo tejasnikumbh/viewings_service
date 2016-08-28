@@ -1,11 +1,16 @@
+
 from rest_framework import serializers
 from . import models
+
+from django.utils import timezone
 
 class ViewingSerializer(serializers.ModelSerializer):
 
 	class Meta:
+
 		fields = (
 			'id',
+			'created_at',
 			'scheduled_time',
 			'company_name',
 			'number_of_desks',
@@ -18,19 +23,26 @@ class ViewingSerializer(serializers.ModelSerializer):
 			'status'
 		)
 		model = models.Viewing
-	
+
 	def validate_tenant(self, value):
-		if not(models.User.objects.filter(id=value).exists()) or \
-		not(models.User.objects.filter(id=value).first().is_tenant):
+		if not(models.User.objects.filter(id=value.id).exists()) or \
+		not(models.User.objects.filter(id=value.id).first().is_tenant):
 			print "Tenant not found"
 			raise serializers.ValidationError("Tenant Not Found")
 		return value
 	
 	def validate_office(self, value):
-		if not(models.Office.objects.filter(id=value).exists()):
+		if not(models.Office.objects.filter(id=value.id).exists()):
 			print "Office not found"
 			raise serializers.ValidationError("Office Not Found")
 		return value
+
+	def validate(self, data):
+		if not(data['scheduled_time'] > timezone.now()):
+			print "Scheduled time has to be in the future"
+			raise serializers.ValidationError("Scheduled time has to be in future")
+		return data
+	
 
 class ConversationSerializer(serializers.ModelSerializer):
 
@@ -48,15 +60,15 @@ class ConversationSerializer(serializers.ModelSerializer):
 		model = models.Conversation
 	
 	def validate_tenant(self, value):
-		if not(models.User.objects.filter(id=value).exists()) or \
-		not(models.User.objects.filter(id=value).first().is_tenant):
+		if not(models.User.objects.filter(id=value.id).exists()) or \
+		not(models.User.objects.filter(id=value.id).first().is_tenant):
 			print "Tenant not found"
 			raise serializers.ValidationError("Tenant Not found")
 		return value
 
 	def validate_host(self, value):
-		if not(models.User.objects.filter(id=value).exists()) or \
-		not(models.User.objects.filter(id=value).first().is_host):
+		if not(models.User.objects.filter(id=value.id).exists()) or \
+		not(models.User.objects.filter(id=value.id).first().is_host):
 			print "Host not found"
 			raise serializers.ValidationError("Host not found")	
 		return value
@@ -89,8 +101,8 @@ class OfficeSerializer(serializers.ModelSerializer):
 		model = models.Office
 
 	def validate_owner(self, value):
-		if not(models.User.objects.filter(id=value).exists()) or \
-		not(models.User.objects.filter(id=value).first().is_host):
+		if not(models.User.objects.filter(id=value.id).exists()) or \
+		not(models.User.objects.filter(id=value.id).first().is_host):
 			print "Host not found"
 			raise serializers.ValidationError("Host not found")
 		return value

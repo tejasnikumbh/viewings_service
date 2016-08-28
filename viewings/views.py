@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
+from django.core.exceptions import ValidationError
 
 from . import models
 from . import serializers
@@ -25,7 +26,7 @@ class Viewings(APIView):
 		'''
 		params = request.query_params
 		# Validating if the request parameters are correct
-		if not(self._validate_get(params)):
+		if not(self._validate_get_structure(params)):
 			content = {
 				"message": "The page you are looking for cannot be found",
 				"detail" : "Refer the API Docs for correct URL Params"
@@ -81,12 +82,13 @@ class Viewings(APIView):
 		'''
 		params = request.data
 		# Checking if all parameters exist
-		if not(self._validate_post(params)):
+		if not(self._validate_post_structure(params)):
 			content = {
 				"message": "Bad Request",
 				"detail" : "One or more parameters is missing"
 			}
 			return Response(content, status = status.HTTP_400_BAD_REQUEST)
+	
 		# Checking if tenant exists
 		if not(self._validate_tenant(params['tenant'])):
 			content = {
@@ -101,17 +103,11 @@ class Viewings(APIView):
 				"detail" : "Office not found"
 			}
 			return Response(content, status = status.HTTP_400_BAD_REQUEST)
+			
 		tenant = models.User.objects.filter(id=params['tenant']).first()
 		office = models.Office.objects.filter(id=params['office']).first()
 		viewing = None
-		# Checking if viewing exists at office by tenant. 
-		# Decline it in that case
-		if models.Viewing.objects.filter(office=office, tenant=tenant).exists():
-			viewing = models.Viewing.objects.filter(office=office, tenant=tenant)
-			viewing.status = 'D'
-			self._save_conversation(viewing=viewing, status='D')
-			viewing.save()
-
+		
 		try: # Will return bad format if any value not according to format
 			viewing = models.Viewing(
 				scheduled_time=params['scheduled_time'],
@@ -123,14 +119,32 @@ class Viewings(APIView):
 				tenant=tenant,
 				office=office,
 				status='R')
-			viewing.save()
 		except:
 			content = {
 				"message": "Bad Request",
 				"detail" : "One or more parameter value not according to format"
 			}
 			return Response(content, status = status.HTTP_400_BAD_REQUEST)
+		try: # Will run serializer validations and return apt errors if any
+			serializer = serializers.ViewingSerializer(viewing)
+			serializer = serializers.ViewingSerializer(data=serializer.data)
+			serializer.is_valid(raise_exception=True)
+		except ValidationError as e:
+			content = {
+				"message": "Bad Request",
+				"detail" : str(e)
+			}
+			return Response(content, status = status.HTTP_400_BAD_REQUEST)
+		
+		# Checking if viewing exists at office by tenant. 
+		# Decline it in that case before saving
+		if models.Viewing.objects.filter(office=office, tenant=tenant).exists():
+			old_viewing = models.Viewing.objects.filter(office=office, tenant=tenant).first()
+			old_viewing.status = 'D'
+			self._save_conversation(viewing=old_viewing, status='D')
+			old_viewing.save()
 
+		viewing.save()
 		self._save_conversation(viewing=viewing, status='R')
 		serializer = serializers.ViewingSerializer(viewing)
 		return Response(serializer.data)
@@ -141,7 +155,7 @@ class Viewings(APIView):
 		'''
 		params = request.data
 		# Checking if all params exist
-		if not(self._validate_put(params)):
+		if not(self._validate_put_structure(params)):
 			content = {
 				"message": "Bad Request",
 				"detail" : "One or more parameters is missing"
@@ -190,7 +204,6 @@ class Viewings(APIView):
 		
 		viewing.status = params['status']
 		viewing.save()
-
 		self._save_conversation(viewing=viewing, status=params['status'])
 		serializer = serializers.ViewingSerializer(viewing)
 		return Response(serializer.data)
@@ -203,7 +216,7 @@ class Viewings(APIView):
 		message_start = ""
 		if status == 'R':
 			message_start = tenant_name + " requested a viewing on "
-			message_end = " with " + host_name
+			message_end = " with " + host_name 
 		elif status == 'D':
 			message_start = host_name + " declined a viewing on "
 			message_end = " with " + tenant_name		
@@ -213,15 +226,23 @@ class Viewings(APIView):
 		message_core = str(processed_at_date_time) + \
 						" for " + \
 						str(requested_for_date_time)
+		message_end += " at " + viewing.office.description
 		message = message_start + message_core + message_end
 		conversation = models.Conversation(
 			tenant=viewing.tenant,
 			host=viewing.office.owner,
 			message=message)
+		# Will run serializer validations and raise apt exception if any
+		serializer = serializers.ConversationSerializer(conversation)
+		# Need to do this since serializer hides the ids while deserialization
+		data = serializer.data
+		data['tenant'] = viewing.tenant.id
+		data['host'] = viewing.office.owner.id
+		serializer = serializers.ConversationSerializer(data=data)
+		serializer.is_valid(raise_exception=True)
 		conversation.save()
 
-
-	def _validate_get(self, params):
+	def _validate_get_structure(self, params):
 		'''
 			Doesn't fail if there are extra params, which at 
 			this point seems unnecessary.
@@ -242,7 +263,7 @@ class Viewings(APIView):
 		print result
 		return result
 
-	def _validate_post(self, params):
+	def _validate_post_structure(self, params):
 		'''
 			Checks if post params are according to the spec, else 
 			returns False
@@ -260,7 +281,7 @@ class Viewings(APIView):
 			return False	
 		return True
 
-	def _validate_put(self, params):
+	def _validate_put_structure(self, params):
 		'''
 			Checks if put params are according to the spec, else
 			returns False
@@ -306,7 +327,7 @@ class Conversations(APIView):
 		'''
 		params = request.query_params
 		# Checking if request valid
-		if not(self._validate_get(params)):
+		if not(self._validate_get_structure(params)):
 			content = {
 				"message": "The page you are looking for cannot be found",
 				"detail" : "Refer the API Docs for correct URL Params"
@@ -321,56 +342,60 @@ class Conversations(APIView):
 			return Response(content, status = status.HTTP_404_NOT_FOUND)
 		
 		user_id = int(params['user_id'])
-		#print tenant
-			
-		as_tenant = models.Conversation.objects.filter(tenant=user_id)
-		hosts = set()
-		host_vals = as_tenant.values('host')
-		for host in host_vals:
-			host_id = host['host']
-			hosts.add(host_id)
-		as_tenant_threads = {}
-		for host_id in hosts:
-			host = models.User.objects.filter(id=host_id).first()
-			as_tenant_threads["host_name"] = host.name
-			serializer = serializers.ConversationSerializer(
-				as_tenant.filter(host=host).order_by('time_stamp').only('message', 'time_stamp'),
-				many=True)
-			as_tenant_threads["messages"] = serializer.data
-			
-
-		as_host = models.Conversation.objects.filter(host=user_id)
-		tenants = set()
-		tenant_vals = as_host.values('tenant')
-		for tenant in tenant_vals:
-			tenant_id = tenant['tenant']
-			tenants.add(tenant_id)
-		as_host_threads = {}
-		for tenant_id in tenants:
-			tenant = models.User.objects.filter(id=tenant_id).first()
-			as_host_threads["tenant_name"] = tenant.name
-			serializer = serializers.ConversationSerializer(
-				as_host.filter(tenant=tenant).order_by('time_stamp').only('message', 'time_stamp'),
-				many=True)
-			as_host_threads["messages"] = serializer.data
+		user = models.User.objects.filter(id=user_id).first()
+		as_tenant_threads = self._threads(user_id=user_id, as_host=False)	
+		as_host_threads = self._threads(user_id=user_id, as_host=True)	
 
 		conversation = { 
-			"as_host": as_host_threads, 
-			"as_tenant": as_tenant_threads
+		    "user_name": user.name,
+		    "messages": {
+		    	"as_host": as_host_threads, 
+				"as_tenant": as_tenant_threads
+		    }
 		}
 		response = json.dumps(conversation)
 		response = json.JSONDecoder().decode(response)
 		return Response(response)
 
+	def _threads(self, user_id, as_host=False):
+		conversations = models.Conversation.objects.filter(host=user_id) \
+		if as_host else models.Conversation.objects.filter(tenant=user_id)
+		partner_type = 'tenant' if as_host else 'host'
+		partner_vals = conversations.values(partner_type)
+		partner_ids = set()
+		for p in partner_vals:
+			p_id = p[partner_type]
+			partner_ids.add(p_id)
+		
+		print partner_ids
+		
+		threads = []
+		for p_id in partner_ids:
+			partner = models.User.objects.filter(id=p_id).first()
+			serializer = None
+			if as_host:
+				serializer = serializers.ConversationSerializer(
+					conversations.filter(tenant=partner).order_by('time_stamp'),
+					many=True)
+			else: 
+				serializer = serializers.ConversationSerializer(
+					conversations.filter(host=partner).order_by('time_stamp'),
+					many=True)
+			current_thread = dict()
+			current_thread['partner_name'] = partner.name
+			current_thread['messages'] = serializer.data
+			threads.append(current_thread)
+		return threads
+
+	def _validate_get_structure(self, params):
+		if 'user_id' not in params.keys():
+			return False
+		return self._validate_int(params['user_id'])
+		
 	def _validate_int(self, string):
 		try: int(string)
 		except: return False
 		return True
 
-	def _validate_get(self, params):
-		if 'user_id' not in params.keys():
-			return False
-		return self._validate_int(params['user_id'])
-		
 	def _validate_user(self, id):
 		return models.User.objects.filter(id=id).exists()
