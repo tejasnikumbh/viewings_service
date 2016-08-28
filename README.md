@@ -72,6 +72,9 @@ Viewings
      	- Checks if tenant exists
      	- Checks if office exists
      	- If same tenant has scheduled a viewing previously, declines it and adds new viewing
+     	- Checks if scheduled time is in future {In Serializer}
+     	- Checks if move in date is in future {In Serializer}
+     	- Checks if tenant is not scheduling viewing at his own place[when he is a host as well] {In Serializer}
     - Example 
 
     ```javascript
@@ -99,8 +102,9 @@ Viewings
      	- Checks if all parameters exist and are in proper format
      	- Checks if viewing exists
      	- Checks if host exists
-     	- Checks if office at viewing is owned by host
      	- Checks if update is performed [R is not Allowed in status field]
+     	- Checks if viewing has already been processed
+     	- Checks if office at viewing is owned by host
     - Example
 
   	```javascript
@@ -129,6 +133,7 @@ Conversations
     	- Checks for request parameter structure
     	- Checks if user_id is in proper format
     	- Checks if user_id exists
+    	- Checks if user is not talking to himself {In Serializer}
     - Example
         ``` 0.0.0.0:8000/api/v1/conversations/user_id=1 ```
     	- The conversations are grouped by user_id of the conversing partner.
