@@ -149,7 +149,7 @@ class Viewings(APIView):
 		# Checking if viewing exists at office by tenant. 
 		# Decline it in that case before saving
 		if models.Viewing.objects.filter(office=office, tenant=tenant).exists():
-			old_viewing = models.Viewing.objects.filter(office=office, tenant=tenant).first()
+			old_viewing = models.Viewing.objects.filter(office=office, tenant=tenant).order_by('id').last()
 			old_viewing.status = 'D'
 			self._save_conversation(viewing=old_viewing, status='D')
 			old_viewing.save()
@@ -195,7 +195,8 @@ class Viewings(APIView):
 		
 		host = models.User.objects.filter(id=params['host_id']).first()
 		viewing = models.Viewing.objects.filter(id=params['viewing_id']).first()
-		
+		print viewing.id
+		print viewing.status
 		# Checking if viewing has already been processed
 		if viewing.status != 'R':
 			content = {
