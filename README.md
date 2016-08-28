@@ -133,23 +133,97 @@ Conversations
         ``` 0.0.0.0:8000/api/v1/conversations/user_id=1 ```
     	- The conversations are grouped by user_id of the conversing partner.
     - Sample Response:-  Note tenant id is same for as_tenant, same with as_host
-	```javascript
-	{
-	    "as_host": {
-		    "tenant_name": "Abhishek Gupta",
-		    "messages": [
-            		{
-                		"time_stamp": "2016-08-27T14:40:17.801918Z",
-                		"message": "Need an office space at somepoint"
-            		},
-		        {
-                		"time_stamp": "2016-08-27T14:40:39.311452Z",
-                		"message": "Sorry man can't do it"
-            		}]
+
+```javascript
+ {
+    "user_name": "Tejas Nikumbh",
+    "messages": {
+        "as_host": [
+            {
+                "partner_name": "Paul Golding",
+                "messages": [
+                    {
+                        "time_stamp": "2016-08-28T07:51:56.618565Z",
+                        "message": "Paul Golding requested a viewing on 2016-08-28 07:51:56.611504 for 2016-08-30T18:00:00Z with Tejas Nikumbh at Office in Bermondsey"
+                    },
+                    {
+                        "time_stamp": "2016-08-28T08:09:37.821563Z",
+                        "message": "Tejas Nikumbh declined a viewing on 2016-08-28 08:09:37.814651 for 2016-08-30 18:00:00+00:00 with Paul Golding at Office in Bermondsey"
+                    },
+                    {
+                        "time_stamp": "2016-08-28T08:09:37.836511Z",
+                        "message": "Paul Golding requested a viewing on 2016-08-28 08:09:37.830209 for 2016-08-29T18:00:00Z with Tejas Nikumbh at Office in Bermondsey"
+                    },
+                    {
+                        "time_stamp": "2016-08-28T08:10:46.350935Z",
+                        "message": "Tejas Nikumbh confirmed a viewing on 2016-08-28 08:10:46.341277 for 2016-08-29 18:00:00+00:00 with Paul Golding at Office in Bermondsey"
+                    }
+                ]
             },
-	    "as_tenant": {
-	    
-	    }
-	}
-    	```
+            {
+                "partner_name": "Kasia Streich",
+                "messages": [
+                    {
+                        "time_stamp": "2016-08-28T07:51:09.051529Z",
+                        "message": "Kasia Streich requested a viewing on 2016-08-28 07:51:09.042243 for 2016-08-30T18:00:00Z with Tejas Nikumbh at Office in USA"
+                    },
+                    {
+                        "time_stamp": "2016-08-28T07:57:03.784420Z",
+                        "message": "Tejas Nikumbh confirmed a viewing on 2016-08-28 07:57:03.778114 for 2016-08-30 18:00:00+00:00 with Kasia Streich at Office in USA"
+                    }
+                ]
+            },
+            {
+                "partner_name": "Abhishek Gupta",
+                "messages": [
+                    {
+                        "time_stamp": "2016-08-28T07:50:54.671956Z",
+                        "message": "Abhishek Gupta requested a viewing on 2016-08-28 07:50:54.664798 for 2016-08-30T18:00:00Z with Tejas Nikumbh at Office in Waterloo"
+                    },
+                    {
+                        "time_stamp": "2016-08-28T07:50:57.958699Z",
+                        "message": "Abhishek Gupta requested a viewing on 2016-08-28 07:50:57.950520 for 2016-08-30T18:00:00Z with Tejas Nikumbh at Office in USA"
+                    },
+                    {
+                        "time_stamp": "2016-08-28T07:57:10.536128Z",
+                        "message": "Tejas Nikumbh confirmed a viewing on 2016-08-28 07:57:10.529209 for 2016-08-30 18:00:00+00:00 with Abhishek Gupta at Office in USA"
+                    },
+                    {
+                        "time_stamp": "2016-08-28T07:57:15.559649Z",
+                        "message": "Tejas Nikumbh confirmed a viewing on 2016-08-28 07:57:15.552640 for 2016-08-30 18:00:00+00:00 with Abhishek Gupta at Office in Waterloo"
+                    }
+                ]
+            }
+        ],
+        "as_tenant": [
+            {
+                "partner_name": "Steph Pau",
+                "messages": [
+                    {
+                        "time_stamp": "2016-08-28T07:53:53.962725Z",
+                        "message": "Tejas Nikumbh requested a viewing on 2016-08-28 07:53:53.956227 for 2016-08-30T18:00:00Z with Steph Pau at Office in Shoreditch"
+                    },
+                    {
+                        "time_stamp": "2016-08-28T08:02:03.259660Z",
+                        "message": "Steph Pau confirmed a viewing on 2016-08-28 08:02:03.253584 for 2016-08-30 18:00:00+00:00 with Tejas Nikumbh at Office in Shoreditch"
+                    }
+                ]
+            },
+            {
+                "partner_name": "Mahtab Ghamsari",
+                "messages": [
+                    {
+                        "time_stamp": "2016-08-28T07:54:01.181889Z",
+                        "message": "Tejas Nikumbh requested a viewing on 2016-08-28 07:54:01.168367 for 2016-08-30T18:00:00Z with Mahtab Ghamsari at Office in Westminster"
+                    },
+                    {
+                        "time_stamp": "2016-08-28T08:03:06.827695Z",
+                        "message": "Mahtab Ghamsari confirmed a viewing on 2016-08-28 08:03:06.820990 for 2016-08-30 18:00:00+00:00 with Tejas Nikumbh at Office in Westminster"
+                    }
+                ]
+            }
+        ]
+    }
+}
+```
     	
