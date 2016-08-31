@@ -11,7 +11,7 @@ Running the Project
 
   	- This will run the project on the 8000 port of 0.0.0.0 of your machine
 
-* If you'd like creating and destroying projects, make a super user using the following 
+* If you'd like creating and destroying super users, make a super user using the following 
 
 	```python manage.py createsuperuser```
 
@@ -37,8 +37,8 @@ Viewings
     	- Checks if user exists
     	- Checks if user is of the specified type [tenant or host]
     - Example
-        - ``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=tenant&status=C ```
-        - ``` 0.0.0.0:8000/api/v1/viewings/user_id=1&user_type=host&status=C ```
+        - ``` 0.0.0.0:8000/api/v1/viewings?user_id=1&user_type=tenant&status=C ```
+        - ``` 0.0.0.0:8000/api/v1/viewings?user_id=1&user_type=host&status=C ```
     - Additional functionality
     	- Can be used to retrieve all viewings for a particular user & type
     	- Can be used to retrieve Requested Viewings for a particular user & type    
@@ -135,7 +135,7 @@ Conversations
     	- Checks if user_id exists
     	- Checks if user is not talking to himself {In Serializer}
     - Example
-        ``` 0.0.0.0:8000/api/v1/conversations/user_id=1 ```
+        ``` 0.0.0.0:8000/api/v1/conversations?user_id=1 ```
     	- The conversations are grouped by user_id of the conversing partner.
     - Sample Response:-  Note tenant id is same for as_tenant, same with as_host
 
